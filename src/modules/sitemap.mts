@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { join, relative } from 'path';
 import { writeFile } from 'fs/promises';
 import { BasicContext } from '@fewu-swg/abstract-types';
 
@@ -13,7 +13,7 @@ function getAllPages(ctx: BasicContext){
     // @ts-ignore
     ctx.extend.Deployer.deployed_files.forEach(v => {
         list.push({
-            url: v.path,
+            url: relative(ctx.PUBLIC_DIRECTORY, v.path),
             time: v.time
         })
     });

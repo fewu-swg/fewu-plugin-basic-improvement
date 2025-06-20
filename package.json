@@ -12,7 +12,6 @@
   "devDependencies": {
     "@fewu-swg/abstract-types": "^1.2.1",
     "@types/node": "^24.0.3",
-    "@types/pug": "^2.0.10",
     "typescript": "^5.8.3"
   },
   "publishConfig": {

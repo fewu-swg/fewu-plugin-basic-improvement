@@ -23,7 +23,11 @@ function getAllPages(ctx: BasicContext){
 function txt(ctx: BasicContext) {
     let pages = getAllPages(ctx);
     let result = ctx.config.url + '\n';
-    for (const v of pages) { result += encodeURI(join(ctx.config.url, v.url)) + '\n' }
+    for (const v of pages) {
+        let url = new URL(ctx.config.url);
+        url.pathname = v.url;
+        result += url.href + '\n';
+    }
     return result;
 }
 
@@ -34,7 +38,7 @@ function xml(ctx: BasicContext) {
     for (const v of pages) {
         let url = new URL(ctx.config.url);
         url.pathname = v.url;
-        result += `<url>\n\t<loc>${encodeURI(url.href)}</loc>\n\t<lastmod>${v.time.toUTCString()}</lastmod>\n</url>\n`;
+        result += `<url>\n\t<loc>${url.href}</loc>\n\t<lastmod>${v.time.toUTCString()}</lastmod>\n</url>\n`;
     }
     result += '</urlset>';
     return result;
